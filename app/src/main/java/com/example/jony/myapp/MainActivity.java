@@ -1,5 +1,6 @@
 package com.example.jony.myapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mAvatarView.setChecked(true);
+                //// TODO: 2016/6/13  跳转动画
+                startActivity(new Intent(MainActivity.this,ClipToOutlineActivity.class));
             }
         });
         mTitle = (TextView) toolbar.findViewById(R.id.title);
@@ -49,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        //// TODO: 2016/6/13 换肤
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -62,6 +66,10 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+
+        if (id == R.id.action_skin) {
             return true;
         }
 

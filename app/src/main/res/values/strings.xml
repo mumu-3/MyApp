@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">My App</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">设置</string>
+    <string name="action_skin">换肤</string>
     <string name="transition_avatar">AvatarTrams</string>
+    <string name="title_activity_clip_to_outline">ClipToOutlineActivity</string>
 </resources>
