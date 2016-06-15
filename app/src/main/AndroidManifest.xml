@@ -20,7 +20,6 @@
             </intent-filter>
         </activity>
 
-
         <!-- View 的 ClipToOutline 方法 可以设置阴影和 剪切轮廓 -->
         <activity
             android:name=".ClipToOutlineActivity"
@@ -33,14 +32,12 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
-
         <!-- 阅读工具类App -->
         <activity
             android:name=".reader_APP.ui.ReaderActivity"
-            android:label="@string/title_activity_reader"
+            android:label="@string/reader"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
     </application>
 
 </manifest>

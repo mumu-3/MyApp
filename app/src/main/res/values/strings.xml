@@ -9,11 +9,10 @@
     <string name="transition_toolbar">ToolbarTransition</string>
     <string name="title_activity_info">InfoActivity</string>
     <string name="reader">阅读类</string>
-    <string name="title_activity_reader">ReaderActivity</string>
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
 
 
     <!-- reader_APP -->
@@ -85,10 +84,10 @@
 
     <string name="reader_text_search_by_keyword">Search By Keyword</string>
     <string name="reader_text_search_by_category">Search By Category</string>
-reader_
+    reader_
     <string name="reader_text_left_only">Left Only</string>
     <string name="reader_text_anywhere">Anywhere</string>
-reader_
+    reader_
     <string name="reader_text_clear_cache_successful">Cache Clear Successfully!</string>
     <string name="reader_text_exit_confirm">Exit Confirm</string>
     <string name="reader_text_exit_confirm_summary">Press back key twice to exit</string>
@@ -132,7 +131,6 @@ reader_
     <string name="reader_text_swipe_to_return">Swipe to Return</string>
     <string name="reader_text_day_mode">Day Mode</string>
     <string name="reader_hint_fail_check_update">Fail to get version info,please check your network setting</string>
-
 
 
 </resources>
