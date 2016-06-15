@@ -3,6 +3,7 @@ package com.example.jony.myapp;
 import android.app.Application;
 import android.content.Context;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -18,6 +19,7 @@ public class BaseApplication extends Application {
         super.onCreate();
         AppContext = getApplicationContext();
         refWatcher = LeakCanary.install(this);
+        Fresco.initialize(AppContext);
     }
 
     public static RefWatcher getRefWatcher(Context context) {

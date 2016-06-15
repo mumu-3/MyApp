@@ -39,11 +39,14 @@ import java.util.Random;
 
 public class CheeseListFragment extends Fragment {
 
-    public interface MyListener{
-       void onHideBar();
-       void onShowBar();
+    public interface MyListener {
+        void onHideBar();
+
+        void onShowBar();
     }
+
     private MyListener myListener;
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

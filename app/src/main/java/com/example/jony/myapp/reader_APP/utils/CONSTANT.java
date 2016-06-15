@@ -38,6 +38,7 @@ public class CONSTANT {
     public static final String placeHolderUri="http://pic.baike.soso.com/p/20140126/20140126144232-793838389.jpg";
     public static final int ID_SUCCESS = 1;
     public static final int ID_FAILURE = 2;
+    public static final int ID_LOADMORE = 3;
     public static final int ID_LOAD_FROM_NET = 3;
     public static final int ID_UPDATE_UI = 4;
     public static final int ID_FROM_CACHE = 5;

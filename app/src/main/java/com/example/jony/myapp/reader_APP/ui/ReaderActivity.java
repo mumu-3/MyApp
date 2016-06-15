@@ -1,5 +1,6 @@
 package com.example.jony.myapp.reader_APP.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,9 +15,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.jony.myapp.R;
+import com.example.jony.myapp.reader_APP.api.DailyApi;
+import com.example.jony.myapp.reader_APP.ui.fragment.DailyFragment;
 
 public class ReaderActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener , CheeseListFragment.MyListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,14 @@ public class ReaderActivity extends AppCompatActivity
         getSupportActionBar().setTitle(R.string.reader_app_name);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               initFragment();
+            }
+        });
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -36,6 +47,17 @@ public class ReaderActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+//
+        //initFragment();
+
+    }
+
+    private void initFragment() {
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container,new DailyFragment(),DailyApi.DAILY).commit();
+
     }
 
     @Override
@@ -88,5 +110,15 @@ public class ReaderActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onHideBar() {
+
+    }
+
+    @Override
+    public void onShowBar() {
+
     }
 }
