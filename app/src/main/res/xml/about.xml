@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/reader_app_name">
+        <Preference
+            android:key="app_intro"
+            android:title="@string/reader_text_app_intro"/>
+        <Preference
+            android:key="check_update"
+            android:title="@string/reader_text_check_update"/>
+        <Preference
+            android:key="demo_video"
+            android:title="@string/reader_text_demo_video"/>
+        <Preference
+            android:key="share"
+            android:title="@string/reader_text_share_leisure" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/reader_setting">
+
+        <Preference
+            android:key="@string/reader_id_language"
+            android:title="@string/reader_text_language" />
+        <Preference
+            android:key="search"
+            android:title="@string/reader_text_search"/>
+        <Preference
+            android:key="@string/reader_id_swipe_back"
+            android:title="@string/reader_text_swipe_to_return"/>
+        <CheckBoxPreference
+            android:key="shake_to_return_new"
+            android:title="@string/reader_text_shake_to_return"
+            android:checked="true"/>
+        <CheckBoxPreference
+            android:key="exit_confirm"
+            android:title="@string/reader_text_exit_confirm"
+            android:summary="@string/reader_text_exit_confirm_summary"
+            android:checked="true"/>
+        <CheckBoxPreference
+            android:key="night_mode"
+            android:title="@string/reader_text_night_mode"
+            android:checked="false"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/reader_text_network">
+        <CheckBoxPreference
+            android:key="no_pic_mode"
+            android:title="@string/reader_text_no_pic_mode"
+            android:checked="false"
+            android:summary="@string/reader_text_no_pic_mode_summary"/>
+        <CheckBoxPreference
+            android:key="auto_refresh"
+            android:title="@string/reader_text_auto_refresh"
+            android:summary="@string/reader_text_auto_refresh_summary"
+            />
+        <Preference
+            android:key="clear_cache"
+            android:title="@string/reader_text_clear_cache"
+            android:summary="@string/reader_text_clear_cache_summary"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

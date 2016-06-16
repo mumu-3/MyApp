@@ -14,42 +14,34 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.jony.myapp.DebugUtils;
 import com.example.jony.myapp.R;
 import com.example.jony.myapp.reader_APP.adapter.DailyAdapter;
-import com.example.jony.myapp.reader_APP.api.DailyApi;
+import com.example.jony.myapp.reader_APP.adapter.NewsItemAdapter;
 import com.example.jony.myapp.reader_APP.db.cache.DailyCache;
-import com.example.jony.myapp.reader_APP.model.daily.DailyBean;
+import com.example.jony.myapp.reader_APP.db.cache.NewsCache;
 import com.example.jony.myapp.reader_APP.model.daily.StoryBean;
+import com.example.jony.myapp.reader_APP.model.news.NewsBean;
 import com.example.jony.myapp.reader_APP.utils.CONSTANT;
-import com.example.jony.myapp.reader_APP.utils.HttpUtil;
-import com.google.gson.Gson;
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 import com.yalantis.phoenix.PullToRefreshView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Created by Jony on 2016/6/15.
+ * Created by Jony on 2016/6/16.
  */
-public class DailyFragment extends Fragment {
+public class NewsItemFragment extends Fragment {
 
 
     private RecyclerView mRv;
     private ProgressBar mPb;
-    private RecyclerView.LayoutManager mLayoutManager;
 
-    protected ImageView placeHolder;
     private PullToRefreshView refreshView;
 
-    private DailyAdapter adapter;
+    private NewsItemAdapter adapter;
 
-    private DailyCache mDailyCache;
+    private NewsCache mNewsCache;
 
-    private ArrayList<StoryBean> mList = new ArrayList<>();
+    private ArrayList<NewsBean> mList = new ArrayList<>();
 
     private Handler mHandler = new Handler() {
         @Override
@@ -68,7 +60,18 @@ public class DailyFragment extends Fragment {
             }
         }
     };
+    private String mUrl;
+    private String mName;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+
+        mUrl = getArguments().getString(getString(R.string.reader_id_url));
+        mName = getArguments().getString(getString(R.string.reader_id_category));
+
+    }
 
     @Nullable
     @Override
@@ -84,8 +87,8 @@ public class DailyFragment extends Fragment {
 
     private void initData() {
 
-        mDailyCache = new DailyCache(mHandler);
-        mDailyCache.load(mList);
+        mNewsCache = new NewsCache(mHandler);
+        mNewsCache.load(mUrl,mList);
 
     }
 
@@ -94,7 +97,7 @@ public class DailyFragment extends Fragment {
 
         if (mList.size() > 0) {
 
-            adapter = new DailyAdapter(mList);
+            adapter = new NewsItemAdapter(getActivity(),mList);
             mRv.setLayoutManager(new LinearLayoutManager(getActivity()));
             mRv.setAdapter(adapter);
             mPb.setVisibility(View.GONE);

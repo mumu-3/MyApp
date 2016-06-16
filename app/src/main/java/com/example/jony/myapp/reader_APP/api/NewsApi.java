@@ -34,6 +34,9 @@ import java.io.InputStream;
  * @version Leisure 1.0
  */
 public class NewsApi {
+
+    public static final String NEWS = "news";
+
     private static String [] newsUrl = null;
     private static String [] newsTitle = null;
     private static Document document = null;

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
-              android:background="@color/colorPrimaryDark"
               android:gravity="center_vertical"
               android:layout_width="match_parent"
+              android:background="@color/light_grey"
+              android:elevation="@dimen/card_margin"
               android:layout_height="match_parent">
 
     <LinearLayout
@@ -15,7 +16,7 @@
 
         <ImageView
             android:layout_width="32dp"
-            android:src="@mipmap/ic_collect_grey"
+            android:id="@+id/tab_1"
             android:layout_height="32dp"/>
 
     </LinearLayout>
@@ -27,9 +28,9 @@
         android:gravity="center"
         android:layout_height="match_parent">
 
-        <ImageButton
+        <ImageView
             android:layout_width="32dp"
-            android:src="@mipmap/ic_home"
+            android:id="@+id/tab_2"
             android:layout_height="32dp"/>
 
     </LinearLayout>
@@ -41,9 +42,9 @@
         android:gravity="center"
         android:layout_height="match_parent">
 
-        <ImageButton
+        <ImageView
             android:layout_width="32dp"
-            android:src="@mipmap/ic_reading"
+            android:id="@+id/tab_3"
             android:layout_height="32dp"/>
 
     </LinearLayout>
@@ -55,9 +56,9 @@
         android:gravity="center"
         android:layout_height="match_parent">
 
-        <ImageButton
+        <ImageView
             android:layout_width="32dp"
-            android:src="@mipmap/ic_about"
+            android:id="@+id/tab_4"
             android:layout_height="32dp"/>
 
     </LinearLayout>

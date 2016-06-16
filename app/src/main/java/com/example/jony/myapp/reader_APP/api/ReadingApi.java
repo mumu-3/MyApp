@@ -32,6 +32,7 @@ import com.example.jony.myapp.reader_APP.utils.Utils;
  * @version 1.0
  */
 public class ReadingApi {
+    public static final String READING = "reading";
     public static final int TAG_LEN = 3;
     public static String searchByTag="http://api.douban.com/v2/book/search?tag=";
     public static String searchByText="http://api.douban.com/v2/book/search?q=";

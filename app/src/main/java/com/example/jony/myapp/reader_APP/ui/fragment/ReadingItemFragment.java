@@ -10,46 +10,38 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.jony.myapp.DebugUtils;
 import com.example.jony.myapp.R;
-import com.example.jony.myapp.reader_APP.adapter.DailyAdapter;
-import com.example.jony.myapp.reader_APP.api.DailyApi;
-import com.example.jony.myapp.reader_APP.db.cache.DailyCache;
-import com.example.jony.myapp.reader_APP.model.daily.DailyBean;
-import com.example.jony.myapp.reader_APP.model.daily.StoryBean;
+import com.example.jony.myapp.reader_APP.adapter.NewsItemAdapter;
+import com.example.jony.myapp.reader_APP.adapter.ReadingItemAdapter;
+import com.example.jony.myapp.reader_APP.api.ReadingApi;
+import com.example.jony.myapp.reader_APP.db.cache.NewsCache;
+import com.example.jony.myapp.reader_APP.db.cache.ReadingCache;
+import com.example.jony.myapp.reader_APP.model.news.NewsBean;
+import com.example.jony.myapp.reader_APP.model.reading.BookBean;
 import com.example.jony.myapp.reader_APP.utils.CONSTANT;
-import com.example.jony.myapp.reader_APP.utils.HttpUtil;
-import com.google.gson.Gson;
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 import com.yalantis.phoenix.PullToRefreshView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Created by Jony on 2016/6/15.
+ * Created by Jony on 2016/6/16.
  */
-public class DailyFragment extends Fragment {
+public class ReadingItemFragment extends Fragment {
 
 
     private RecyclerView mRv;
     private ProgressBar mPb;
-    private RecyclerView.LayoutManager mLayoutManager;
 
-    protected ImageView placeHolder;
     private PullToRefreshView refreshView;
 
-    private DailyAdapter adapter;
+    private ReadingItemAdapter adapter;
 
-    private DailyCache mDailyCache;
+    private ReadingCache mReadingCache;
 
-    private ArrayList<StoryBean> mList = new ArrayList<>();
+    private ArrayList<BookBean> mList = new ArrayList<>();
 
     private Handler mHandler = new Handler() {
         @Override
@@ -68,7 +60,19 @@ public class DailyFragment extends Fragment {
             }
         }
     };
+    private String mUrl;
+    private String mName;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+
+        mName = getArguments().getString(getString(R.string.reader_id_category));
+
+        mUrl = ReadingApi.searchByTag + mName;
+
+    }
 
     @Nullable
     @Override
@@ -84,8 +88,8 @@ public class DailyFragment extends Fragment {
 
     private void initData() {
 
-        mDailyCache = new DailyCache(mHandler);
-        mDailyCache.load(mList);
+        mReadingCache = new ReadingCache(mHandler);
+        mReadingCache.load(mUrl,mList);
 
     }
 
@@ -94,7 +98,7 @@ public class DailyFragment extends Fragment {
 
         if (mList.size() > 0) {
 
-            adapter = new DailyAdapter(mList);
+            adapter = new ReadingItemAdapter(getActivity(),mList);
             mRv.setLayoutManager(new LinearLayoutManager(getActivity()));
             mRv.setAdapter(adapter);
             mPb.setVisibility(View.GONE);

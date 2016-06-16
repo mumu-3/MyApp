@@ -17,4 +17,5 @@
     <dimen name="card_margin">5dp</dimen>
     <dimen name="view_margin">8dp</dimen>
     <dimen name="item_padding">15dp</dimen>
+    <dimen name="size_tab">48dp</dimen>
 </resources>

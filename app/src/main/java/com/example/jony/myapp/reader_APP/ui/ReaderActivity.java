@@ -1,9 +1,6 @@
 package com.example.jony.myapp.reader_APP.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,13 +10,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.example.jony.myapp.R;
 import com.example.jony.myapp.reader_APP.api.DailyApi;
+import com.example.jony.myapp.reader_APP.api.NewsApi;
+import com.example.jony.myapp.reader_APP.api.ReadingApi;
+import com.example.jony.myapp.reader_APP.ui.fragment.AboutFragment;
 import com.example.jony.myapp.reader_APP.ui.fragment.DailyFragment;
+import com.example.jony.myapp.reader_APP.ui.fragment.NewsFragment;
+import com.example.jony.myapp.reader_APP.ui.fragment.ReadingFragment;
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
 public class ReaderActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener , CheeseListFragment.MyListener {
+        implements NavigationView.OnNavigationItemSelectedListener, CheeseListFragment.MyListener, View.OnClickListener {
+
+    private ImageView mTab1;
+    private ImageView mTab2;
+    private ImageView mTab3;
+    private ImageView mTab4;
+
+    private int mCurrentFragment;
+    private SmartTabLayout mTabTitle;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +44,6 @@ public class ReaderActivity extends AppCompatActivity
         getSupportActionBar().setTitle(R.string.reader_app_name);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               initFragment();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -48,17 +54,89 @@ public class ReaderActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-//
-        //initFragment();
+
+        initBottomTab();
+
 
     }
 
-    private void initFragment() {
+    private void initBottomTab() {
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container,new DailyFragment(),DailyApi.DAILY).commit();
+        findViewById(R.id.ll_tab_1).setOnClickListener(this);
+        findViewById(R.id.ll_tab_2).setOnClickListener(this);
+        findViewById(R.id.ll_tab_3).setOnClickListener(this);
+        findViewById(R.id.ll_tab_4).setOnClickListener(this);
+
+        mTab1 = (ImageView) findViewById(R.id.tab_1);
+        mTab2 = (ImageView) findViewById(R.id.tab_2);
+        mTab3 = (ImageView) findViewById(R.id.tab_3);
+        mTab4 = (ImageView) findViewById(R.id.tab_4);
+
+        mCurrentFragment = 0;
+        initTabImage(mCurrentFragment);
+        initFragment(mCurrentFragment);
 
     }
+
+    private void initTabImage(int t) {
+        ImageView[] imageViews = new ImageView[]{mTab1, mTab2, mTab3, mTab4};
+
+        int[] images = new int[]{R.drawable.tab1, R.drawable.tab2, R.drawable.tab3, R.drawable.tab4};
+        int[] imagesSelected = new int[]{R.drawable.tab1_selected, R.drawable.tab2_selected, R.drawable.tab3_selected, R.drawable.tab4_selected};
+
+
+        for (int i = 0; i < imageViews.length; i++) {
+
+            imageViews[i].setImageResource(images[i]);
+
+        }
+        if (t > -1 && t < imageViews.length) {
+
+            imageViews[t].setImageResource(imagesSelected[t]);
+        }
+
+    }
+
+    private void initFragment(int currentFragment) {
+
+        switch (currentFragment) {
+            case 0:
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, new DailyFragment()).commit();
+                getSupportActionBar().setTitle(R.string.reader_daily);
+
+                break;
+            case 1:
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, new NewsFragment()).commit();
+                getSupportActionBar().setTitle(R.string.reader_news);
+
+                break;
+            case 2:
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, new ReadingFragment()).commit();
+                getSupportActionBar().setTitle(R.string.reader_reading);
+                if(menu != null) {
+                    menu.clear();
+                    getMenuInflater().inflate(R.menu.menu_reading, menu);
+                }
+
+                break;
+            case 3:
+
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.container, new AboutFragment()).commit();
+                getSupportActionBar().setTitle(R.string.reader_collection);
+
+                break;
+        }
+
+        mCurrentFragment = currentFragment;
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -72,15 +150,20 @@ public class ReaderActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        this.menu = menu;
         getMenuInflater().inflate(R.menu.menu_daily, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
+            return true;
+        }
+        if (id == R.id.menu_search){
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -120,5 +203,36 @@ public class ReaderActivity extends AppCompatActivity
     @Override
     public void onShowBar() {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.ll_tab_1:
+                if (mCurrentFragment != 0) {
+                    initTabImage(0);
+                    initFragment(0);
+                }
+                break;
+            case R.id.ll_tab_2:
+                if (mCurrentFragment != 1) {
+                    initTabImage(1);
+                    initFragment(1);
+                }
+                break;
+            case R.id.ll_tab_3:
+                if (mCurrentFragment != 2) {
+                    initTabImage(2);
+                    initFragment(2);
+                }
+                break;
+            case R.id.ll_tab_4:
+                if (mCurrentFragment != 3) {
+                    initTabImage(3);
+                    initFragment(3);
+                }
+                break;
+        }
     }
 }

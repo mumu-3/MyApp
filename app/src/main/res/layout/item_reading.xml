@@ -9,12 +9,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
-    android:background="?attr/background">
+  >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="?attr/background">
+        >
         <ImageView
             android:id="@+id/ebook"
             android:src="@mipmap/ic_ebook_blue"
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="?attr/background">
+            >
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/bookImg"
                 android:layout_width="109dp"
@@ -45,13 +45,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:textColor="?attr/textColor"/>
+                    android:textColor="@color/reader_text_color"/>
                 <TextView
                     android:id="@+id/bookInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:textColor="?attr/textColor"/>
+                    android:textColor="@color/reader_text_color"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -66,7 +66,7 @@
                     <TextView
                         android:id="@+id/text"
                         android:text="@string/reader_text_collection"
-                        android:textColor="?attr/textLight"
+                        android:textColor="@color/reader_text_light"
                         android:layout_below="@+id/collect_cb"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="5dp"

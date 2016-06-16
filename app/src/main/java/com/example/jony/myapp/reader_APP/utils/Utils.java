@@ -13,6 +13,8 @@ import org.xml.sax.SAXException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -56,6 +58,27 @@ public class Utils {
         return true;
     }
 
+
+    public static String RegexFind(String regex,String string){
+        return RegexFind(regex, string, 1, 1);
+    }
+    public static String RegexFind(String regex,String string,int start,int end){
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(string);
+        String res = string;
+        while (matcher.find()){
+            res = matcher.group();
+        }
+        return res.substring(start, res.length() - end);
+    }
+
+
+
+    public static String RegexReplace(String regex,String string,String replace){
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(string);
+        return matcher.replaceAll(replace);
+    }
 
     // 判断当前的语言环境
     public static int getCurrentLanguage() {
