@@ -36,8 +36,9 @@
     <string name="reader_setting">设置</string>
     <string name="reader_text_auto_refresh">自动刷新</string>
     <string name="reader_text_auto_refresh_summary">在WIFI下自动从网络加载数据</string>
+    <string name="reader_text_auto_refresh_summary_off">关闭WIFI下自动加载数据</string>
     <string name="reader_text_clear_cache">清除缓存</string>
-    <string name="reader_text_clear_cache_summary">清除"闲暇"的缓存</string>
+    <string name="reader_text_clear_cache_summary">清除该应用的缓存</string>
     <string name="reader_text_language">语言</string>
     <string name="reader_text_night_mode">夜间模式</string>
     <string name="reader_text_no_pic_mode">无图模式</string>
@@ -81,4 +82,6 @@
     <string name="reader_text_anywhere">任意位置有效</string>
     <string name="reader_text_day_mode">日间模式</string>
     <string name="reader_hint_fail_check_update">获取版本信息失败，请检查网络设置</string>
+    <string name="reader_loading">正在加载...</string>
+    <string name="reader_about_app">关于 闲暇 </string>
 </resources>

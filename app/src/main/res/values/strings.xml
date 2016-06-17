@@ -57,6 +57,7 @@
     <string name="reader_text_preference">Preference</string>
     <string name="reader_text_auto_refresh">Auto Refresh</string>
     <string name="reader_text_auto_refresh_summary">Load data from network automatically if WIFI is connected</string>
+    <string name="reader_text_auto_refresh_summary_off">Not Auto Refresh</string>
     <string name="reader_text_night_mode">Night Mode</string>
     <string name="reader_text_shake_to_return">Shake to return</string>
     <string name="reader_text_no_pic_mode">Auto save traffic</string>
@@ -131,6 +132,8 @@
     <string name="reader_text_swipe_to_return">Swipe to Return</string>
     <string name="reader_text_day_mode">Day Mode</string>
     <string name="reader_hint_fail_check_update">Fail to get version info,please check your network setting</string>
+    <string name="reader_loading">Please wait while loading...</string>
+    <string name="reader_about_app">about this App</string>
 
 
 </resources>

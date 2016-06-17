@@ -20,7 +20,9 @@
 package com.example.jony.myapp.reader_APP.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -34,6 +36,7 @@ import android.widget.TextView;
 
 import com.example.jony.myapp.R;
 import com.example.jony.myapp.reader_APP.model.reading.BookBean;
+import com.example.jony.myapp.reader_APP.ui.ReadingDetailsActivity;
 import com.example.jony.myapp.reader_APP.utils.HttpUtil;
 import com.example.jony.myapp.reader_APP.utils.Settings;
 import com.example.jony.myapp.reader_APP.utils.Utils;
@@ -83,11 +86,11 @@ public class ReadingItemAdapter extends RecyclerView.Adapter<ReadingItemAdapter.
         holder.parentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             /*   Intent intent = new Intent(mContext, ReadingDetailsActivity.class);
+               Intent intent = new Intent(mContext, ReadingDetailsActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(mContext.getString(R.string.id_book), bookBean);
+                bundle.putSerializable(mContext.getString(R.string.reader_id_book), bookBean);
                 intent.putExtras(bundle);
-                mContext.startActivity(intent);*/
+                mContext.startActivity(intent);
             }
         });
 

@@ -49,7 +49,9 @@
     <color name="red">#ff5252</color>
     <color name="light_grey">#f5f5f5</color>
 
-
+    <color name="reader_night_primary">#3A3A3A</color>
+    <color name="reader_night_primary_dark">#353535</color>
+    <color name="reader_night_accent">#4682B4</color>
 
     <color name="reader_bar_title">#ffffff</color>
     <color name="reader_text_color">#000000</color>

@@ -1,6 +1,10 @@
 package com.example.jony.myapp.reader_APP.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,9 +21,12 @@ import com.example.jony.myapp.reader_APP.api.DailyApi;
 import com.example.jony.myapp.reader_APP.api.NewsApi;
 import com.example.jony.myapp.reader_APP.api.ReadingApi;
 import com.example.jony.myapp.reader_APP.ui.fragment.AboutFragment;
+import com.example.jony.myapp.reader_APP.ui.fragment.CollectionFragment;
 import com.example.jony.myapp.reader_APP.ui.fragment.DailyFragment;
 import com.example.jony.myapp.reader_APP.ui.fragment.NewsFragment;
 import com.example.jony.myapp.reader_APP.ui.fragment.ReadingFragment;
+import com.example.jony.myapp.reader_APP.utils.CONSTANT;
+import com.example.jony.myapp.reader_APP.utils.Settings;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
 public class ReaderActivity extends AppCompatActivity
@@ -33,6 +40,16 @@ public class ReaderActivity extends AppCompatActivity
     private int mCurrentFragment;
     private SmartTabLayout mTabTitle;
     private Menu menu;
+    private FragmentTransaction mFragmentTransaction;
+    private DailyFragment mDailyFragment;
+    private NewsFragment mNewsFragment;
+    private ReadingFragment mReadingFragment;
+    private AboutFragment mAboutFragment;
+    private android.app.FragmentTransaction mFragmentTransaction1;
+    private SmartTabLayout mTabLayout;
+
+    private boolean isShake = false;
+    private long lastPressTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +62,7 @@ public class ReaderActivity extends AppCompatActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -54,6 +71,7 @@ public class ReaderActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        mTabLayout = (SmartTabLayout) findViewById(R.id.tab_layout);
 
         initBottomTab();
 
@@ -99,27 +117,38 @@ public class ReaderActivity extends AppCompatActivity
 
     private void initFragment(int currentFragment) {
 
+
         switch (currentFragment) {
             case 0:
 
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, new DailyFragment()).commit();
                 getSupportActionBar().setTitle(R.string.reader_daily);
+                if (menu != null) {
+                    menu.clear();
+                    getMenuInflater().inflate(R.menu.menu_daily, menu);
+                }
 
                 break;
             case 1:
 
+
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, new NewsFragment()).commit();
                 getSupportActionBar().setTitle(R.string.reader_news);
+                if (menu != null) {
+                    menu.clear();
+                    getMenuInflater().inflate(R.menu.menu_daily, menu);
+                }
 
                 break;
             case 2:
 
+
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, new ReadingFragment()).commit();
                 getSupportActionBar().setTitle(R.string.reader_reading);
-                if(menu != null) {
+                if (menu != null) {
                     menu.clear();
                     getMenuInflater().inflate(R.menu.menu_reading, menu);
                 }
@@ -127,9 +156,13 @@ public class ReaderActivity extends AppCompatActivity
                 break;
             case 3:
 
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.container, new AboutFragment()).commit();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, new CollectionFragment()).commit();
                 getSupportActionBar().setTitle(R.string.reader_collection);
+                if (menu != null) {
+                    menu.clear();
+                    getMenuInflater().inflate(R.menu.menu_daily, menu);
+                }
 
                 break;
         }
@@ -143,9 +176,10 @@ public class ReaderActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        } else if (isShake == false && canExit()){
             super.onBackPressed();
         }
+            isShake = false;
     }
 
     @Override
@@ -161,9 +195,10 @@ public class ReaderActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(this,AboutActivity.class);
+            startActivity(intent);
         }
-        if (id == R.id.menu_search){
+        if (id == R.id.menu_search) {
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -234,5 +269,17 @@ public class ReaderActivity extends AppCompatActivity
                 }
                 break;
         }
+    }
+
+
+    private boolean canExit(){
+        if(Settings.isExitConfirm){
+            if(System.currentTimeMillis() - lastPressTime > CONSTANT.exitConfirmTime){
+                lastPressTime = System.currentTimeMillis();
+                Snackbar.make(getCurrentFocus(), R.string.reader_notify_exit_confirm,Snackbar.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+        return true;
     }
 }

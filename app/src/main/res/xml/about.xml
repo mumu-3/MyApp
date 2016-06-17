@@ -3,7 +3,8 @@
     <PreferenceCategory android:title="@string/reader_app_name">
         <Preference
             android:key="app_intro"
-            android:title="@string/reader_text_app_intro"/>
+            android:title="@string/reader_text_app_intro"
+            android:summary="@string/reader_about_app"/>
         <Preference
             android:key="check_update"
             android:title="@string/reader_text_check_update"/>
@@ -49,7 +50,7 @@
             android:title="@string/reader_text_no_pic_mode"
             android:checked="false"
             android:summary="@string/reader_text_no_pic_mode_summary"/>
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="auto_refresh"
             android:title="@string/reader_text_auto_refresh"
             android:summary="@string/reader_text_auto_refresh_summary"

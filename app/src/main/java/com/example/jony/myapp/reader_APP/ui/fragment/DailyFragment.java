@@ -94,7 +94,7 @@ public class DailyFragment extends Fragment {
 
         if (mList.size() > 0) {
 
-            adapter = new DailyAdapter(mList);
+            adapter = new DailyAdapter(getActivity(),mList);
             mRv.setLayoutManager(new LinearLayoutManager(getActivity()));
             mRv.setAdapter(adapter);
             mPb.setVisibility(View.GONE);

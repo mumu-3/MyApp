@@ -1,9 +1,15 @@
 package com.example.jony.myapp.reader_APP.db.cache;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 
+import com.example.jony.myapp.BaseApplication;
 import com.example.jony.myapp.DebugUtils;
 import com.example.jony.myapp.reader_APP.api.DailyApi;
+import com.example.jony.myapp.reader_APP.db.database.DatabaseHelper;
+import com.example.jony.myapp.reader_APP.db.database.table.DailyTable;
 import com.example.jony.myapp.reader_APP.model.daily.DailyBean;
 import com.example.jony.myapp.reader_APP.model.daily.StoryBean;
 import com.example.jony.myapp.reader_APP.utils.CONSTANT;
@@ -27,10 +33,19 @@ import java.util.List;
  */
 public class DailyCache {
 
-    protected Handler mHandler;
+    private  Context mContext = BaseApplication.AppContext;
+    private DatabaseHelper mHelper;
+    private SQLiteDatabase db;
+
+    private Handler mHandler;
+    private ContentValues values;
 
     public DailyCache(Handler handler) {
         mHandler = handler;
+
+        mHelper = DatabaseHelper.instance(mContext);
+        db = mHelper.getWritableDatabase();
+
     }
 
     // load today's data
@@ -96,5 +111,28 @@ public class DailyCache {
                 mHandler.sendEmptyMessage(CONSTANT.ID_LOADMORE);
             }
         });
+    }
+
+    public synchronized void addToCollection(StoryBean storyBean){
+        db = mHelper.getWritableDatabase();
+        db.beginTransaction();
+        values = new ContentValues();
+        putData(storyBean);
+        db.setTransactionSuccessful();
+        db.endTransaction();
+    }
+
+
+    protected void putData(StoryBean storyBean) {
+        values.put(DailyTable.TITLE,storyBean.getTitle());
+        values.put(DailyTable.ID, storyBean.getId());
+        values.put(DailyTable.IMAGE, storyBean.getImages()[0]);
+        values.put(DailyTable.BODY, storyBean.getBody() == null ? "":storyBean.getBody());
+        values.put(DailyTable.LARGEPIC, storyBean.getLargepic());
+        db.insert(DailyTable.COLLECTION_NAME, null, values);
+    }
+
+    public synchronized void execSQL(String sql){
+        db.execSQL(sql);
     }
 }

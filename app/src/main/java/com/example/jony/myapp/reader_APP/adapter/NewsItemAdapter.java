@@ -20,6 +20,7 @@
 package com.example.jony.myapp.reader_APP.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,6 +32,7 @@ import android.widget.TextView;
 
 import com.example.jony.myapp.R;
 import com.example.jony.myapp.reader_APP.model.news.NewsBean;
+import com.example.jony.myapp.reader_APP.support.WebViewUrlActivity;
 
 import java.util.ArrayList;
 
@@ -61,7 +63,7 @@ public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final NewsBean newsBean = mList.get(position);
         holder.description.setText(newsBean.getDescription());
         holder.title.setText(newsBean.getTitle());
@@ -70,9 +72,9 @@ public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.ViewHo
         holder.parentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* Intent intent = new Intent(mContext, WebViewUrlActivity.class);
-                intent.putExtra(mContext.getString(R.string.id_url), getItem(position).getLink());
-                mContext.startActivity(intent);*/
+                Intent intent = new Intent(mContext, WebViewUrlActivity.class);
+                intent.putExtra(mContext.getString(R.string.reader_id_url), mList.get(position).getLink());
+                mContext.startActivity(intent);
             }
         });
 

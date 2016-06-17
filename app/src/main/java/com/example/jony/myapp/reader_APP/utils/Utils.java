@@ -2,10 +2,17 @@ package com.example.jony.myapp.reader_APP.utils;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.webkit.WebView;
 
 import com.example.jony.myapp.BaseApplication;
 import com.example.jony.myapp.DebugUtils;
+import com.example.jony.myapp.reader_APP.db.database.DatabaseHelper;
+import com.example.jony.myapp.reader_APP.db.database.table.DailyTable;
+import com.example.jony.myapp.reader_APP.db.database.table.NewsTable;
+import com.example.jony.myapp.reader_APP.db.database.table.ReadingTable;
+import com.example.jony.myapp.reader_APP.db.database.table.ScienceTable;
 
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -127,7 +134,27 @@ public class Utils {
 
 
 
+    public static void clearCache(){
 
+        WebView wb = new WebView(mContext);
+        wb.clearCache(true);
+
+        DatabaseHelper mHelper = DatabaseHelper.instance(mContext);
+        SQLiteDatabase db = mHelper.getWritableDatabase();
+
+        db.execSQL(mHelper.DELETE_TABLE_DATA + DailyTable.NAME);
+        //  db.execSQL(DailyTable.CREATE_TABLE);
+
+        db.execSQL(mHelper.DELETE_TABLE_DATA + NewsTable.NAME);
+        //  db.execSQL(NewsTable.CREATE_TABLE);
+
+        db.execSQL(mHelper.DELETE_TABLE_DATA + ReadingTable.NAME);
+        //  db.execSQL(ReadingTable.CREATE_TABLE);
+
+        db.execSQL(mHelper.DELETE_TABLE_DATA + ScienceTable.NAME);
+        //  db.execSQL(ScienceTable.CREATE_TABLE);
+
+    }
 
     /**
      * 获得当前系统的亮度值： 0~255

@@ -15,13 +15,14 @@
         xmlns:card_view="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="?attr/background"
         android:orientation="horizontal">
         <TextView
             android:id="@+id/title"
             android:layout_width="0dp"
+            android:textColor="?attr/textColor"
             android:layout_weight="7"
             android:layout_height="wrap_content"
-            android:textColor="@color/reader_text_color"
             android:padding="10dp"
             android:layout_gravity="center_vertical"
             android:textSize="19sp" />

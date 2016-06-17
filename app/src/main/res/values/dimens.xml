@@ -18,4 +18,5 @@
     <dimen name="view_margin">8dp</dimen>
     <dimen name="item_padding">15dp</dimen>
     <dimen name="size_tab">48dp</dimen>
+    <dimen name="text_padding">20dp</dimen>
 </resources>

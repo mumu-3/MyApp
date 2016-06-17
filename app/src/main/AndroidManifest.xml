@@ -41,8 +41,19 @@
         <activity
             android:name=".reader_APP.ui.ReaderActivity"
             android:label="@string/reader"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/NightTheme">
         </activity>
+
+        <activity android:name=".reader_APP.ui.AboutActivity"
+                  android:theme="@style/NightTheme"/>
+        <activity android:name=".reader_APP.ui.AppInfoActivity"
+                  android:theme="@style/DayTheme"/>
+        <activity android:name=".reader_APP.ui.DemoVideoActivity"
+                  android:theme="@style/DayTheme"/>
+        <activity android:name=".reader_APP.ui.DailyDetailsActivity"
+                  android:theme="@style/DayTheme"/>
+        <activity android:name=".reader_APP.ui.ReadingDetailsActivity"
+                  android:theme="@style/DayTheme"/>
     </application>
 
 </manifest>

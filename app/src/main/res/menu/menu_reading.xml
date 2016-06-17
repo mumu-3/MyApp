@@ -7,4 +7,9 @@
         android:icon="@mipmap/ic_search_white"
         app:showAsAction="always"/>
 
+    <item
+        android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        app:showAsAction="never"/>
+
 </menu>

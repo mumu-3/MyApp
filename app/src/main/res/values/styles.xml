@@ -34,4 +34,35 @@
     <style name="CustomCollectTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/selector_collect</item>
     </style>
+
+
+    <!-- Base application theme. -->
+    <style name="DayTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="background">@android:color/white</item>
+        <item name="barTitleColor">@android:color/white</item>
+        <item name="barColor">@color/colorPrimary</item>
+        <item name="textColor">@color/reader_text_color</item>
+        <item name="textLight">@color/reader_text_light</item>
+        <item name="textBright">@color/colorPrimary</item>
+        <item name="dividerColor">@color/reader_dividerColor</item>
+    </style>
+
+    <style name="NightTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/reader_night_primary</item>
+        <item name="colorPrimaryDark">@color/reader_night_primary_dark</item>
+        <item name="colorAccent">@color/reader_night_accent</item>
+        <item name="background">@color/reader_night_primary</item>
+        <item name="barTitleColor">@android:color/white</item>
+        <item name="barColor">@color/reader_night_primary_dark</item>
+        <item name="textColor">@android:color/white</item>
+        <item name="textLight">@color/reader_text_light</item>
+        <item name="textBright">@color/reader_night_primary</item>
+        <item name="dividerColor">@color/reader_dividerColor</item>
+
+    </style>
 </resources>

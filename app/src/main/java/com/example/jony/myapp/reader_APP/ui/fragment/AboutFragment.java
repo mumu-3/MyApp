@@ -1,5 +1,6 @@
 package com.example.jony.myapp.reader_APP.ui.fragment;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.os.Message;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.SwitchPreference;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -15,6 +17,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.example.jony.myapp.R;
+import com.example.jony.myapp.reader_APP.ui.AppInfoActivity;
+import com.example.jony.myapp.reader_APP.ui.DemoVideoActivity;
 import com.example.jony.myapp.reader_APP.utils.CONSTANT;
 import com.example.jony.myapp.reader_APP.utils.HttpUtil;
 import com.example.jony.myapp.reader_APP.utils.Settings;
@@ -38,7 +42,7 @@ public class AboutFragment extends PreferenceFragment implements Preference.OnPr
     private Preference mLanguage;
     private Preference mSearch;
     private Preference mSwipeBack;
-    private CheckBoxPreference mAutoRefresh;
+    private SwitchPreference mAutoRefresh;
     private CheckBoxPreference mNightMode;
     private CheckBoxPreference mShakeToReturn;
     private CheckBoxPreference mNoPicMode;
@@ -50,9 +54,8 @@ public class AboutFragment extends PreferenceFragment implements Preference.OnPr
     private final String CHECK_UPDATE = "check_update";
     private final String SHARE = "share";
 
-
-    private ProgressBar progressBar;
     private Settings mSettings;
+    private ProgressDialog mDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,7 +73,7 @@ public class AboutFragment extends PreferenceFragment implements Preference.OnPr
         mSearch = findPreference(Settings.SEARCH);
         mSwipeBack = findPreference(Settings.SWIPE_BACK);
 
-        mAutoRefresh = (CheckBoxPreference) findPreference(Settings.AUTO_REFRESH);
+        mAutoRefresh = (SwitchPreference) findPreference(Settings.AUTO_REFRESH);
         mNightMode = (CheckBoxPreference) findPreference(Settings.NIGHT_MODE);
         mShakeToReturn = (CheckBoxPreference) findPreference(Settings.SHAKE_TO_RETURN);
         mNoPicMode = (CheckBoxPreference) findPreference(Settings.NO_PIC_MODE);
@@ -82,6 +85,10 @@ public class AboutFragment extends PreferenceFragment implements Preference.OnPr
         mSwipeBack.setSummary(this.getResources().getStringArray(R.array.swipe_back)[Settings.swipeID]);
 
         mAutoRefresh.setChecked(Settings.isAutoRefresh);
+
+        mAutoRefresh.setSwitchTextOn(R.string.reader_text_auto_refresh_summary);
+        mAutoRefresh.setSwitchTextOff(R.string.reader_text_auto_refresh_summary_off);
+
         mNightMode.setChecked(Settings.isNightMode);
         mShakeToReturn.setChecked(Settings.isShakeMode);
         mExitConfirm.setChecked(Settings.isExitConfirm);
@@ -105,20 +112,20 @@ public class AboutFragment extends PreferenceFragment implements Preference.OnPr
         mCheckUpdate.setOnPreferenceClickListener(this);
         mShare.setOnPreferenceClickListener(this);
 
-        progressBar = (ProgressBar) getActivity().findViewById(R.id.progressbar);
     }
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
 
         if (mAppIntro == preference) {
-            /*Intent toIntro = new Intent(getActivity(), AppIntroActivity.class);
-            startActivity(toIntro);*/
+            Intent toIntro = new Intent(getActivity(), AppInfoActivity.class);
+            startActivity(toIntro);
         } else if (mDemoVideo == preference) {
-            /*Intent toVideo = new Intent(getActivity(), DemoVideoActivity.class);
-            startActivity(toVideo);*/
+            Intent toVideo = new Intent(getActivity(), DemoVideoActivity.class);
+            startActivity(toVideo);
         } else if (mCheckUpdate == preference) {
-            progressBar.setVisibility(View.VISIBLE);
+
+            showProgressBar();
 
             Request.Builder builder = new Request.Builder();
             builder.url(CONSTANT.VERSION_URL);
@@ -152,15 +159,25 @@ public class AboutFragment extends PreferenceFragment implements Preference.OnPr
         } else if(preference == mLanguage){
             showLangDialog();
         }else if(preference == mClearCache){
-           /* Utils.clearCache();
+            Utils.clearCache();
             Settings.needRecreate = true;
-            Snackbar.make(getView(), R.string.reader_text_clear_cache_successful,Snackbar.LENGTH_SHORT).show();*/
+            Snackbar.make(getView(), R.string.reader_text_clear_cache_successful,Snackbar.LENGTH_SHORT).show();
         }else if(preference == mSearch){
             ShowSearchSettingDialog();
         }else if(preference == mSwipeBack){
             showSwipeSettingsDialog();
         }
         return false;
+    }
+
+    private void showProgressBar() {
+
+        mDialog = new ProgressDialog(getActivity());
+        mDialog.setMessage(getString(R.string.reader_loading));
+        mDialog.setIndeterminate(true);
+        mDialog.setCancelable(true);
+        mDialog.show();
+
     }
 
 
@@ -202,7 +219,8 @@ public class AboutFragment extends PreferenceFragment implements Preference.OnPr
     private Handler handle = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            progressBar.setVisibility(View.GONE);
+
+            mDialog.dismiss();
             return false;
         }
     });
@@ -268,4 +286,7 @@ public class AboutFragment extends PreferenceFragment implements Preference.OnPr
 
                 ).show();
     }
+
+
+
 }
