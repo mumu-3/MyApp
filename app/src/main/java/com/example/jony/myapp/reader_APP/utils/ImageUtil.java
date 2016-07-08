@@ -12,7 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.graphics.Palette;
 
-import com.example.jony.myapp.BaseApplication;
+import com.example.jony.myapp.main.BaseApplication;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 

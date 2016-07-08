@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,13 +84,15 @@ public class ReadingItemFragment extends Fragment {
         mPb = (ProgressBar) view.findViewById(R.id.progressbar);
 
         initData();
+
+
         return view;
     }
 
-    private void initData() {
+    public void initData() {
 
         mReadingCache = new ReadingCache(mHandler);
-        mReadingCache.load(mUrl,mList);
+        mReadingCache.load(mUrl, mList);
 
     }
 
@@ -98,7 +101,7 @@ public class ReadingItemFragment extends Fragment {
 
         if (mList.size() > 0) {
 
-            adapter = new ReadingItemAdapter(getActivity(),mList);
+            adapter = new ReadingItemAdapter(getActivity(), mList);
             mRv.setLayoutManager(new LinearLayoutManager(getActivity()));
             mRv.setAdapter(adapter);
             mPb.setVisibility(View.GONE);

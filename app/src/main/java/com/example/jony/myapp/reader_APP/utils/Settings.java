@@ -22,7 +22,7 @@ package com.example.jony.myapp.reader_APP.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.jony.myapp.BaseApplication;
+import com.example.jony.myapp.main.BaseApplication;
 
 /**
  *
@@ -30,6 +30,7 @@ import com.example.jony.myapp.BaseApplication;
 public class Settings {
 
     public static  boolean needRecreate = false;
+    public static boolean needCache = true;
     public static boolean isShakeMode = true;
     public static boolean noPicMode = false;
     public static boolean isNightMode = false;

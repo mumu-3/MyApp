@@ -21,7 +21,7 @@ package com.example.jony.myapp.reader_APP.model.reading;
 
 import android.content.Context;
 
-import com.example.jony.myapp.BaseApplication;
+import com.example.jony.myapp.main.BaseApplication;
 import com.example.jony.myapp.R;
 
 import java.io.Serializable;

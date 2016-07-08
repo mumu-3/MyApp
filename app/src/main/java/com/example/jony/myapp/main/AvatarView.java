@@ -1,4 +1,4 @@
-package com.example.jony.myapp;
+package com.example.jony.myapp.main;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -19,6 +19,8 @@ import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.Checkable;
 import android.widget.ImageView;
+
+import com.example.jony.myapp.R;
 
 /**
  * Created by Jony on 2016/6/13.

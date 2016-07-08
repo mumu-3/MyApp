@@ -134,6 +134,10 @@
     <string name="reader_hint_fail_check_update">Fail to get version info,please check your network setting</string>
     <string name="reader_loading">Please wait while loading...</string>
     <string name="reader_about_app">about this App</string>
+    <string name="shop">电商类</string>
+    <string name="news">新闻类</string>
+    <string name="video">视频类</string>
+    <string name="qq">社交类</string>
 
 
 </resources>

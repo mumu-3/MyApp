@@ -24,6 +24,7 @@ package com.example.jony.myapp.reader_APP.model.daily;
  * Created by mummyding on 16-1-1.
  */
 public class DailyBean {
+
     private String date;
     private StoryBean[] stories;
     private TopStory[] top_stories;

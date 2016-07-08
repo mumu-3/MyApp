@@ -1,4 +1,4 @@
-package com.example.jony.myapp;
+package com.example.jony.myapp.main;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.jony.myapp.R;
 import com.example.jony.myapp.reader_APP.ui.ReaderActivity;
 
 public class InfoActivity extends AppCompatActivity {

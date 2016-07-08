@@ -4,7 +4,7 @@ package com.example.jony.myapp.reader_APP.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 
-import com.example.jony.myapp.BaseApplication;
+import com.example.jony.myapp.main.BaseApplication;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;

@@ -31,6 +31,8 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.example.jony.myapp.R;
+import com.example.jony.myapp.reader_APP.db.cache.NewsCache;
+import com.example.jony.myapp.reader_APP.db.database.table.NewsTable;
 import com.example.jony.myapp.reader_APP.model.news.NewsBean;
 import com.example.jony.myapp.reader_APP.support.WebViewUrlActivity;
 
@@ -46,6 +48,8 @@ public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.ViewHo
     private ArrayList<NewsBean> mList;
     private Context mContext;
     private boolean isCollection = false;
+
+    private NewsCache mCache;
 
     public NewsItemAdapter(Context context, ArrayList list) {
 
@@ -106,13 +110,13 @@ public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.ViewHo
         holder.collect_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                /*newsBean.setIs_collected(isChecked ? 1 : 0);
+                newsBean.setIs_collected(isChecked ? 1 : 0);
                 mCache.execSQL(NewsTable.updateCollectionFlag(newsBean.getTitle(), isChecked ? 1 : 0));
                 if (isChecked) {
                     mCache.addToCollection(newsBean);
                 } else {
                     mCache.execSQL(NewsTable.deleteCollectionFlag(newsBean.getTitle()));
-                }*/
+                }
             }
         });
         holder.collect_cb.setChecked(newsBean.getIs_collected() == 1 ? true:false);

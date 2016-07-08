@@ -5,8 +5,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 
-import com.example.jony.myapp.BaseApplication;
-import com.example.jony.myapp.DebugUtils;
+import com.example.jony.myapp.main.BaseApplication;
+import com.example.jony.myapp.main.DebugUtils;
 import com.example.jony.myapp.reader_APP.api.DailyApi;
 import com.example.jony.myapp.reader_APP.db.database.DatabaseHelper;
 import com.example.jony.myapp.reader_APP.db.database.table.DailyTable;
@@ -47,6 +47,7 @@ public class DailyCache {
         db = mHelper.getWritableDatabase();
 
     }
+
 
     // load today's data
     public void load(final ArrayList<StoryBean> list){

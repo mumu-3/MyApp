@@ -22,6 +22,7 @@ import com.example.jony.myapp.reader_APP.db.cache.NewsCache;
 import com.example.jony.myapp.reader_APP.model.daily.StoryBean;
 import com.example.jony.myapp.reader_APP.model.news.NewsBean;
 import com.example.jony.myapp.reader_APP.utils.CONSTANT;
+import com.example.jony.myapp.reader_APP.utils.Settings;
 import com.yalantis.phoenix.PullToRefreshView;
 
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ public class NewsItemFragment extends Fragment {
 
     private ArrayList<NewsBean> mList = new ArrayList<>();
 
+    private boolean needCache;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -53,6 +55,9 @@ public class NewsItemFragment extends Fragment {
 
                 case CONSTANT.ID_SUCCESS:
                     initView();
+                    if(needCache){
+                        mNewsCache.cache(mCategory,mList);
+                    }
                     break;
                 case CONSTANT.ID_LOADMORE:
                     adapter.notifyDataSetChanged();
@@ -61,7 +66,7 @@ public class NewsItemFragment extends Fragment {
         }
     };
     private String mUrl;
-    private String mName;
+    private String mCategory;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,7 +74,9 @@ public class NewsItemFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         mUrl = getArguments().getString(getString(R.string.reader_id_url));
-        mName = getArguments().getString(getString(R.string.reader_id_category));
+        mCategory = getArguments().getString(getString(R.string.reader_id_category));
+
+        needCache = Settings.needCache;
 
     }
 

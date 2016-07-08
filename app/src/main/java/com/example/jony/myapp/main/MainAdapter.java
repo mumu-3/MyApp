@@ -1,4 +1,4 @@
-package com.example.jony.myapp;
+package com.example.jony.myapp.main;
 
 import android.app.Activity;
 import android.support.annotation.ColorRes;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.jony.myapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +39,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     private void initData() {
         mDatas = new ArrayList<>();
         mDatas.add(new Category(R.string.reader,R.mipmap.icon_category_knowledge_raster,Theme.topeka));
-        mDatas.add(new Category(R.string.microReader,R.mipmap.icon_category_entertainment_raster,Theme.purple));
-        mDatas.add(new Category(R.string.microReader,R.mipmap.icon_category_food_raster,Theme.green));
-        mDatas.add(new Category(R.string.microReader,R.mipmap.icon_category_geography_raster,Theme.red));
-        mDatas.add(new Category(R.string.microReader,R.mipmap.icon_category_history_raster,Theme.blue));
+        mDatas.add(new Category(R.string.shop,R.mipmap.icon_category_entertainment_raster,Theme.purple));
+        mDatas.add(new Category(R.string.news,R.mipmap.icon_category_food_raster,Theme.green));
+        mDatas.add(new Category(R.string.video,R.mipmap.icon_category_geography_raster,Theme.red));
+        mDatas.add(new Category(R.string.qq,R.mipmap.icon_category_history_raster,Theme.blue));
         mDatas.add(new Category(R.string.microReader,R.mipmap.icon_category_leaderboard_raster,Theme.yellow));
         mDatas.add(new Category(R.string.microReader,R.mipmap.icon_category_music_raster,Theme.topeka));
     }

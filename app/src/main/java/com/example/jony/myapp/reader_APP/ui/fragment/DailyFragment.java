@@ -14,22 +14,13 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.jony.myapp.DebugUtils;
 import com.example.jony.myapp.R;
 import com.example.jony.myapp.reader_APP.adapter.DailyAdapter;
-import com.example.jony.myapp.reader_APP.api.DailyApi;
 import com.example.jony.myapp.reader_APP.db.cache.DailyCache;
-import com.example.jony.myapp.reader_APP.model.daily.DailyBean;
 import com.example.jony.myapp.reader_APP.model.daily.StoryBean;
 import com.example.jony.myapp.reader_APP.utils.CONSTANT;
-import com.example.jony.myapp.reader_APP.utils.HttpUtil;
-import com.google.gson.Gson;
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 import com.yalantis.phoenix.PullToRefreshView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**

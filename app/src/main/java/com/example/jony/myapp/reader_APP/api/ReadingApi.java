@@ -19,7 +19,7 @@
 
 package com.example.jony.myapp.reader_APP.api;
 
-import com.example.jony.myapp.BaseApplication;
+import com.example.jony.myapp.main.BaseApplication;
 import com.example.jony.myapp.R;
 import com.example.jony.myapp.reader_APP.model.reading.BookBean;
 import com.example.jony.myapp.reader_APP.utils.Utils;

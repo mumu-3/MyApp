@@ -1,4 +1,4 @@
-package com.example.jony.myapp;
+package com.example.jony.myapp.main;
 
 import android.content.Context;
 import android.util.Log;

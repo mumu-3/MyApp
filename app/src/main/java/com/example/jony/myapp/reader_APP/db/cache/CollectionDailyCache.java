@@ -23,11 +23,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 
-import com.example.jony.myapp.BaseApplication;
+import com.example.jony.myapp.main.BaseApplication;
 import com.example.jony.myapp.reader_APP.db.database.DatabaseHelper;
 import com.example.jony.myapp.reader_APP.db.database.table.DailyTable;
 import com.example.jony.myapp.reader_APP.model.daily.StoryBean;
-import com.example.jony.myapp.reader_APP.model.reading.BookBean;
 import com.example.jony.myapp.reader_APP.utils.CONSTANT;
 
 import java.util.ArrayList;

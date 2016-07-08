@@ -1,6 +1,8 @@
-package com.example.jony.myapp;
+package com.example.jony.myapp.main;
 
 import android.support.annotation.ColorRes;
+
+import com.example.jony.myapp.R;
 
 /**
  * Created by Jony on 2016/6/14.

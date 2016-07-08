@@ -1,9 +1,10 @@
 package com.example.jony.myapp.reader_APP.ui;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -16,10 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.example.jony.myapp.main.BaseApplication;
 import com.example.jony.myapp.R;
-import com.example.jony.myapp.reader_APP.api.DailyApi;
-import com.example.jony.myapp.reader_APP.api.NewsApi;
-import com.example.jony.myapp.reader_APP.api.ReadingApi;
 import com.example.jony.myapp.reader_APP.ui.fragment.AboutFragment;
 import com.example.jony.myapp.reader_APP.ui.fragment.CollectionFragment;
 import com.example.jony.myapp.reader_APP.ui.fragment.DailyFragment;
@@ -27,6 +26,7 @@ import com.example.jony.myapp.reader_APP.ui.fragment.NewsFragment;
 import com.example.jony.myapp.reader_APP.ui.fragment.ReadingFragment;
 import com.example.jony.myapp.reader_APP.utils.CONSTANT;
 import com.example.jony.myapp.reader_APP.utils.Settings;
+import com.example.jony.myapp.reader_APP.utils.Utils;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
 public class ReaderActivity extends AppCompatActivity
@@ -48,18 +48,53 @@ public class ReaderActivity extends AppCompatActivity
     private android.app.FragmentTransaction mFragmentTransaction1;
     private SmartTabLayout mTabLayout;
 
+    private Settings mSettings = Settings.getInstance();
+
     private boolean isShake = false;
     private long lastPressTime = 0;
+    private int mLang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Language
+        mLang = Utils.getCurrentLanguage();
+        if (mLang > -1) {
+            Utils.changeLanguage(this, mLang);
+        }
+
+        //Settings
+        Settings.isShakeMode = mSettings.getBoolean(Settings.SHAKE_TO_RETURN, false);
+        Settings.searchID = mSettings.getInt(Settings.SEARCH, 0);
+        Settings.swipeID = mSettings.getInt(Settings.SWIPE_BACK,0);
+        Settings.isAutoRefresh = mSettings.getBoolean(Settings.AUTO_REFRESH, false);
+        Settings.isExitConfirm = mSettings.getBoolean(Settings.EXIT_CONFIRM, true);
+        Settings.isNightMode = mSettings.getBoolean(Settings.NIGHT_MODE, false);
+        Settings.noPicMode = mSettings.getBoolean(Settings.NO_PIC_MODE, false);
+
+
+        // change Brightness
+        if(mSettings.isNightMode && Utils.getSysScreenBrightness() > CONSTANT.NIGHT_BRIGHTNESS){
+            Utils.setSysScreenBrightness(CONSTANT.NIGHT_BRIGHTNESS);
+        }else if(mSettings.isNightMode == false && Utils.getSysScreenBrightness() == CONSTANT.NIGHT_BRIGHTNESS){
+            Utils.setSysScreenBrightness(CONSTANT.DAY_BRIGHTNESS);
+        }
+
+        if(Settings.isNightMode){
+            this.setTheme(R.style.NightTheme);
+        }else{
+            this.setTheme(R.style.DayTheme);
+        }
+
+
         setContentView(R.layout.activity_reader2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setTitle(R.string.reader_app_name);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
 
         DrawerLayout drawer =  (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -71,6 +106,19 @@ public class ReaderActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        /**设置MenuItem的字体颜色**/
+        if(Settings.isNightMode){
+            Resources resource = (Resources)getBaseContext().getResources();
+            ColorStateList csl = (ColorStateList)resource.getColorStateList(R.color.navigation_menu_item_color_dark);
+            navigationView.setItemTextColor(csl);
+        }else{
+            Resources resource = (Resources)getBaseContext().getResources();
+            ColorStateList csl = (ColorStateList)resource.getColorStateList(R.color.navigation_menu_item_color);
+            navigationView.setItemTextColor(csl);
+        }
+
+
+        navigationView.getMenu().getItem(0).setChecked(true);
         mTabLayout = (SmartTabLayout) findViewById(R.id.tab_layout);
 
         initBottomTab();
@@ -199,7 +247,8 @@ public class ReaderActivity extends AppCompatActivity
             startActivity(intent);
         }
         if (id == R.id.menu_search) {
-            return true;
+            Intent intent = new Intent(this,SearchBooksActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -281,5 +330,27 @@ public class ReaderActivity extends AppCompatActivity
             }
         }
         return true;
+    }
+
+
+    /**
+     * 在设置 里 更改设置之后，返回时 会调用 onResume 然后执行 recreate
+     * 会重新根据Setting的选项创建主题及设置
+     *
+     * */
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(Settings.needRecreate) {
+            Settings.needRecreate = false;
+            this.recreate();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        BaseApplication.getRefWatcher(this).watch(this);
     }
 }

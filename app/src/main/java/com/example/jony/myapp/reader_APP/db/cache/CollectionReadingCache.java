@@ -23,7 +23,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 
-import com.example.jony.myapp.BaseApplication;
+import com.example.jony.myapp.main.BaseApplication;
 import com.example.jony.myapp.reader_APP.db.database.DatabaseHelper;
 import com.example.jony.myapp.reader_APP.db.database.table.ReadingTable;
 import com.example.jony.myapp.reader_APP.model.reading.BookBean;

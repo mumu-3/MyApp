@@ -30,7 +30,7 @@ import android.os.Message;
 import android.support.v4.widget.NestedScrollView;
 import android.view.View;
 
-import com.example.jony.myapp.DebugUtils;
+import com.example.jony.myapp.main.DebugUtils;
 import com.example.jony.myapp.R;
 import com.example.jony.myapp.reader_APP.api.DailyApi;
 import com.example.jony.myapp.reader_APP.db.cache.DailyCache;

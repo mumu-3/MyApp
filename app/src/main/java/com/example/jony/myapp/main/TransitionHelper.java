@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.jony.myapp;
+package com.example.jony.myapp.main;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

@@ -29,7 +29,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
-import com.example.jony.myapp.BaseApplication;
+import com.example.jony.myapp.main.BaseApplication;
 import com.example.jony.myapp.R;
 import com.example.jony.myapp.reader_APP.support.SwipeBackActivity;
 import com.example.jony.myapp.reader_APP.utils.DisplayUtil;
@@ -69,12 +69,12 @@ public abstract class BaseDetailsActivity extends SwipeBackActivity {
             Utils.changeLanguage(this, mLang);
         }
 
-       /* //set Theme
+        //set Theme
         if(Settings.isNightMode){
             this.setTheme(R.style.NightTheme);
         }else{
             this.setTheme(R.style.DayTheme);
-        }*/
+        }
     }
 
     @Override
