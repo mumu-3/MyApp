@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.jony.myapp.R;
+import com.example.jony.myapp.music_APP.MusicActivity;
 import com.example.jony.myapp.reader_APP.ui.ReaderActivity;
 
 public class InfoActivity extends AppCompatActivity {
@@ -37,7 +38,7 @@ public class InfoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        Category category = getIntent().getParcelableExtra(Category.TAG);
+        final Category category = getIntent().getParcelableExtra(Category.TAG);
 
 
         toolbar.setBackgroundColor(getResources().getColor(category.getTheme().getPrimaryColor()));
@@ -48,7 +49,13 @@ public class InfoActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(InfoActivity.this,ReaderActivity.class));
+                if (category.getName() == R.string.reader) {
+
+                    startActivity(new Intent(InfoActivity.this, ReaderActivity.class));
+                }else  if (category.getName() == R.string.music) {
+
+                    startActivity(new Intent(InfoActivity.this, MusicActivity.class));
+                }
             }
         });
 

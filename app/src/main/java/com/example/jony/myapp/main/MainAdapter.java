@@ -44,7 +44,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         mDatas.add(new Category(R.string.video,R.mipmap.icon_category_geography_raster,Theme.red));
         mDatas.add(new Category(R.string.qq,R.mipmap.icon_category_history_raster,Theme.blue));
         mDatas.add(new Category(R.string.microReader,R.mipmap.icon_category_leaderboard_raster,Theme.yellow));
-        mDatas.add(new Category(R.string.microReader,R.mipmap.icon_category_music_raster,Theme.topeka));
+        mDatas.add(new Category(R.string.music,R.mipmap.icon_category_music_raster,Theme.topeka));
     }
 
     @Override
